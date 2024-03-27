@@ -1,6 +1,8 @@
 package com.example.rv
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +13,18 @@ class MahasiswaAdapter( private val context: Context, private val data:ArrayList
 
     override fun onBindViewHolder(holder: MahasiswaViewHolder, position: Int) {
         var mhs: Mahasiswa = data.get(position)
+        var current = data[position]
         holder.tvNama.setText(mhs.nama)
         holder.tvNim.setText(mhs.nim)
+        holder.itemView.setOnClickListener{
+            val intent = Intent(context, Layout2::class.java)
+            var bun: Bundle = Bundle()
+            bun.putString("nim", current.nim)
+            bun.putString("nama", current.nama)
+            intent.putExtras(bun)
+            context.startActivity(intent)
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MahasiswaViewHolder {
